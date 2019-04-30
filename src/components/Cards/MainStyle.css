@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+
+}
+.custom_style {
+    max-width: 750px;
+    margin: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      
+  }
+
+  .custom_single_card {
+      width: 31.3%;
+      margin: 1%;
+  }
