@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import SingleCard from './SingleCard';
 import  './MainStyle.css'
 import {shuffleArray} from '../Helpers';
+import Navbar from '../Navbar'
 
 class MainCard extends Component {
 
     static defaultProps = {
-        Icons: [{
+        Images: [{
             "id": "1",
             "image": "http://getwallpapers.com/wallpaper/full/1/6/f/485533.jpg"
           },
@@ -61,7 +62,7 @@ class MainCard extends Component {
         topScore: 0,
         result: "",
         clicked: [],
-        Icons: this.props.Icons,
+        Images: this.props.Images,
         gameOver: false
     };
 
@@ -79,12 +80,12 @@ class MainCard extends Component {
 
     pointIncrease = () => {
         let score = this.state.currentScore + 1;
-        if(score === this.state.Icons.length) {
+        if(score === this.state.Images.length) {
             this.setState({
                 result: 'You win Click Again',
                 currentScore: 0,
                 clicked: [],
-                Icons: this.props.Icons,
+                Images: this.props.Images,
                 gameOver: false
             })
         } else if(score > this.state.topScore) {
@@ -104,7 +105,7 @@ class MainCard extends Component {
 
 
     renderCard = () => {
-        return this.state.Icons.map(icon => {
+        return this.state.Images.map(icon => {
             return <SingleCard
             id={icon.id}
             image={icon.image}
@@ -115,7 +116,7 @@ class MainCard extends Component {
 
     resetIconArray = () => {
         this.setState({
-            Icons: shuffleArray(this.props.Icons)
+            Images: shuffleArray(this.props.Images)
         })
     };
 
@@ -123,19 +124,27 @@ class MainCard extends Component {
         this.setState({
             currentScore: 0,
             topScore: this.state.topScore,
-            result: 'You loss!',
+            result: 'You Loss!',
             clicked: [],
-            Icons: this.props.Icons,
+            Images: this.props.Images,
             gameOver: true
         })
-        this.resetIconArray()
+        this.resetIconArray();
     };
 
   render() {
+      const {topScore, currentScore, result} = this.state;
     return (
+        <Fragment>
+          <Navbar
+          top={topScore}
+          current={currentScore}
+          result={result}
+           />
       <div className='custom_style'>
             {this.renderCard()}
       </div>
+        </Fragment>
     )
   }
 }
