@@ -66,6 +66,12 @@ class MainCard extends Component {
         gameOver: false
     };
 
+    componentDidMount() {
+        this.setState({
+            result: 'Click on an Image to start the game'
+        })
+    }
+
     handleClick = (id) => {
         if(!this.state.clicked.includes(id)) {
             this.pointIncrease();
